@@ -4,7 +4,7 @@ require 'pp'
 describe ShoppingCart do
 
   it "can be instantiated with no pricing rules" do
-    expect{ ShoppingCart.new }.not_to raise_error
+    expect { ShoppingCart.new }.not_to raise_error
   end
 
   it "should initialise with a total of 0" do

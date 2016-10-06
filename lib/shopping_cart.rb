@@ -9,7 +9,7 @@ class ShoppingCart
   end
 
   def total
-    @products.inject(0){|sum, product| sum += product.price }
+    @products.inject(0) { |sum, product| sum += product.price }
   end
 
 end
