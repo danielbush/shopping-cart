@@ -1,7 +1,7 @@
 # These are integration tests for shopping cart and pricing rules systems.
 
 require 'shopping_cart'
-require 'pricing_rules_manager'
+require 'pricing_rules_factory'
 
 
 describe "shopping cart scenarios" do
@@ -23,8 +23,8 @@ describe "shopping cart scenarios" do
 
   describe "how cart fetches pricing rules" do
     it "should be able to total and get items" do
-      manager = PricingRulesManager.new
-      cart = ShoppingCart.new(manager.pricing_rules)
+      factory = PricingRulesFactory.new
+      cart = ShoppingCart.new(factory.pricing_rules)
       expect { cart.total }.not_to raise_error
       expect { cart.items }.not_to raise_error
     end
