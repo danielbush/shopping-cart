@@ -5,7 +5,8 @@ class ShoppingCart
     @products = {}
   end
 
-  def add product
+  def add product, promo_code=nil
+    @promo_code = promo_code if promo_code
     if @products[product.code] then
       @products[product.code][:count] += 1
       @products[product.code][:cost] += product.price
@@ -41,7 +42,11 @@ class ShoppingCart
   end
 
   def line_items_for_rules
-    @pricing_rules ? @pricing_rules.call : []
+    if @pricing_rules then
+      @pricing_rules.call(line_items_for_products, @promo_code)
+    else
+      []
+    end
   end
 
 end

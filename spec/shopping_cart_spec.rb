@@ -92,6 +92,28 @@ describe ShoppingCart do
         expect(cart.total).to eq 10
       end
 
+      it "should pass items to pricing rules" do
+        expect(pricing_rules).to receive(:call).with([ line1 ], nil)
+        cart = ShoppingCart.new(pricing_rules)
+        cart.add(product1)
+        cart.total
+      end
+
+      it "should pass promo code to pricing rules" do
+        expect(pricing_rules).to receive(:call).with([ line1 ], 'promo-code-1')
+        cart = ShoppingCart.new(pricing_rules)
+        cart.add(product1, 'promo-code-1')
+        cart.total
+      end
+
+      it "should pass promo code to pricing rules if 2nd #add has no promo code" do
+        expect(pricing_rules).to receive(:call).with([ line1, line2 ], 'promo-code-1')
+        cart = ShoppingCart.new(pricing_rules)
+        cart.add(product1, 'promo-code-1')
+        cart.add(product2)
+        cart.total
+      end
+
     end
 
   end
