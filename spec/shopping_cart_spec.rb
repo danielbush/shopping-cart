@@ -10,6 +10,15 @@ describe ShoppingCart do
     double('Product', { code: 'prod2-code', name: 'prod2-name', price: 15 })
   }
 
+  # Line items.
+
+  let(:line1) {
+    { code: 'prod1-code', description: 'prod1-name', count: 1, price: 10, cost: 10 }
+  }
+  let(:line2) {
+    { code: 'prod2-code', description: 'prod2-name', count: 1, price: 15, cost: 15 }
+  }
+
   it "can be instantiated with no pricing rules" do
     expect { ShoppingCart.new }.not_to raise_error
   end
@@ -37,10 +46,6 @@ describe ShoppingCart do
       cart = ShoppingCart.new
       cart.add(product1)
       cart.add(product2)
-      line1 = { code: 'prod1-code', description: 'prod1-name',
-                count: 1, price: 10, cost: 10 }
-      line2 = { code: 'prod2-code', description: 'prod2-name',
-                count: 1, price: 15, cost: 15 }
       expect(cart.items).to eq([ line1, line2 ])
     end
 
@@ -48,9 +53,8 @@ describe ShoppingCart do
       cart = ShoppingCart.new
       cart.add(product1)
       cart.add(product1)
-      line1 = { code: 'prod1-code', description: 'prod1-name',
-                count: 2, price: 10, cost: 20 }
-      expect(cart.items).to eq([ line1 ])
+      line = line1.merge(count: 2, cost: 20)
+      expect(cart.items).to eq([ line ])
 
     end
   end
