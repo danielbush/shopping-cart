@@ -1,6 +1,7 @@
 class ShoppingCart
 
-  def initialize
+  def initialize pricing_rules=nil
+    @pricing_rules = pricing_rules
     @products = {}
   end
 

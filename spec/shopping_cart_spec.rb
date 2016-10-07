@@ -55,4 +55,23 @@ describe ShoppingCart do
     end
   end
 
+  context "with pricing rules" do
+
+    let(:extra_line) {
+      { code: 'extra-code', description: 'extra-desc',
+        count: 1, price: 10, cost: 10 }
+    }
+    let(:pricing_rules) {
+      double('PricingRules', { analyze: extra_line })
+    }
+
+    it "should instantiate with pricing_rules" do
+      expect { ShoppingCart.new(pricing_rules) }.not_to raise_error
+    end
+
+    describe ShoppingCart, "#items" do
+    end
+
+  end
+
 end
