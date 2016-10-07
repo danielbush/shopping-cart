@@ -21,9 +21,16 @@ class ShoppingCart
   end
 
   def total
-    @products.values.inject(0) { |sum, item|
+    sum = @products.values.inject(0) { |sum, item|
       sum += (item[:count] * item[:cost])
     }
+    if @pricing_rules then
+      @pricing_rules.call.inject(sum) { |sum, item|
+        sum += (item[:count] * item[:cost])
+      }
+    else
+      sum
+    end
   end
 
   # Return array of line items in cart.

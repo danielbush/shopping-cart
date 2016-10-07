@@ -81,6 +81,15 @@ describe ShoppingCart do
 
     end
 
+    describe ShoppingCart, "#total" do
+
+      it "should add line item values to the total" do
+        cart = ShoppingCart.new(pricing_rules)
+        expect(cart.total).to eq 10
+      end
+
+    end
+
   end
 
 end
