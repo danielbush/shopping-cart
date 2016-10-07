@@ -1,6 +1,9 @@
 require 'current_rules'
+require 'examples'
 
 describe "current pricing rules" do
+
+  include_context 'examples'
 
   describe "3 for 2 deal" do
 
