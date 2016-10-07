@@ -61,8 +61,11 @@ describe ShoppingCart do
       { code: 'extra-code', description: 'extra-desc',
         count: 1, price: 10, cost: 10 }
     }
+
+    # PricingRules#call is expected to return an array of line items.
+
     let(:pricing_rules) {
-      double('PricingRules', { analyze: extra_line })
+      double('PricingRules', { call: [ extra_line ] })
     }
 
     it "should instantiate with pricing_rules" do
@@ -70,6 +73,12 @@ describe ShoppingCart do
     end
 
     describe ShoppingCart, "#items" do
+
+      it "should add additional items received from pricing_rules" do
+        cart = ShoppingCart.new(pricing_rules)
+        expect(cart.items).to eq [ extra_line ]
+      end
+
     end
 
   end

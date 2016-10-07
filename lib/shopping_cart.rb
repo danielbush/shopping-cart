@@ -31,7 +31,11 @@ class ShoppingCart
   # Suitable for display by a view.
 
   def items
-    @products.values
+    if @pricing_rules then
+      @products.values + @pricing_rules.call
+    else
+      @products.values
+    end
   end
 
 end
