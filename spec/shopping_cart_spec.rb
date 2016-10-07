@@ -24,9 +24,22 @@ describe ShoppingCart do
   end
 
   describe ShoppingCart, "#items" do
+
     it "for empty cart, should return empty array" do
       cart = ShoppingCart.new
       expect(cart.items).to eq []
+    end
+
+    it "should aggregate products with same code" do
+      cart = ShoppingCart.new
+      cart.add(product1)
+      cart.add(product1)
+      expect(cart.items).to eq([ { code: 'prod1-code',
+                                   description: 'prod1-name',
+                                   count: 2,
+                                   price: 10,
+                                   cost: 20 } ])
+
     end
   end
 

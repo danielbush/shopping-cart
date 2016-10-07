@@ -1,15 +1,28 @@
 class ShoppingCart
 
   def initialize
-    @products = []
+    @products = {}
   end
 
   def add product
-    @products.push(product)
+    if @products[product.code] then
+      @products[product.code][:count] += 1
+      @products[product.code][:cost] += product.price
+    else
+      @products[product.code] = {
+        count: 1,
+        code: product.code,
+        description: product.name,
+        price: product.price,
+        cost: product.price
+      }
+    end
   end
 
   def total
-    @products.inject(0) { |sum, product| sum += product.price }
+    @products.values.inject(0) { |sum, item|
+      sum += (item[:count] * item[:cost])
+    }
   end
 
   # Return array of line items in cart.
@@ -17,7 +30,7 @@ class ShoppingCart
   # Suitable for display by a view.
 
   def items
-    []
+    @products.values
   end
 
 end
