@@ -21,16 +21,9 @@ class ShoppingCart
   end
 
   def total
-    sum = @products.values.inject(0) { |sum, item|
+    self.items.inject(0) { |sum, item|
       sum += (item[:count] * item[:cost])
     }
-    if @pricing_rules then
-      @pricing_rules.call.inject(sum) { |sum, item|
-        sum += (item[:count] * item[:cost])
-      }
-    else
-      sum
-    end
   end
 
   # Return array of line items in cart.
@@ -38,11 +31,17 @@ class ShoppingCart
   # Suitable for display by a view.
 
   def items
-    if @pricing_rules then
-      @products.values + @pricing_rules.call
-    else
-      @products.values
-    end
+    line_items_for_products + line_items_for_rules
+  end
+
+  private
+
+  def line_items_for_products
+    @products.values
+  end
+
+  def line_items_for_rules
+    @pricing_rules ? @pricing_rules.call : []
   end
 
 end
