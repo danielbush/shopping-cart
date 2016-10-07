@@ -48,11 +48,9 @@ describe ShoppingCart do
       cart = ShoppingCart.new
       cart.add(product1)
       cart.add(product1)
-      expect(cart.items).to eq([ { code: 'prod1-code',
-                                   description: 'prod1-name',
-                                   count: 2,
-                                   price: 10,
-                                   cost: 20 } ])
+      line1 = { code: 'prod1-code', description: 'prod1-name',
+                count: 2, price: 10, cost: 20 }
+      expect(cart.items).to eq([ line1 ])
 
     end
   end
