@@ -3,6 +3,10 @@ require 'pp'
 
 describe ShoppingCart do
 
+  let(:product1) {
+    double('Product', { code: 'prod1-code', name: 'prod1-name', price: 10 })
+  }
+
   it "can be instantiated with no pricing rules" do
     expect { ShoppingCart.new }.not_to raise_error
   end
@@ -11,12 +15,18 @@ describe ShoppingCart do
     expect(ShoppingCart.new.total).to eq 0
   end
 
-  context ShoppingCart, "#add" do
+  describe ShoppingCart, "#add" do
     it "should increase the cart total" do
-      product = double('Product', { code: 'ult_small', name: 'Unlimited 1G', price: 10 })
       cart = ShoppingCart.new
-      cart.add(product)
+      cart.add(product1)
       expect(cart.total).to eq(10)
+    end
+  end
+
+  describe ShoppingCart, "#items" do
+    it "for empty cart, should return empty array" do
+      cart = ShoppingCart.new
+      expect(cart.items).to eq []
     end
   end
 
