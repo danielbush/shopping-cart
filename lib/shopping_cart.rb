@@ -3,6 +3,7 @@ class ShoppingCart
   def initialize pricing_rules=nil
     @pricing_rules = pricing_rules
     @products = {}
+    @promo_code = nil
   end
 
   def add product, promo_code=nil
