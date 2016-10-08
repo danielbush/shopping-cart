@@ -25,8 +25,22 @@ manager.rule '3 for 2 / ult_small' do |items: [], promo_code: nil|
   end
 end
 
-manager.rule 'ult_large bulk discount' do |items, promo_code=nil|
-  []
+manager.rule 'Bulk discount / ult_large' do |items: [], promo_code: nil|
+  item = items.find { |item| item[:code] == 'ult_large' }
+  if not item then
+    []
+  elsif item[:count] <= 3 then
+    []
+  else
+    [
+      {
+        code: 'Bulk discount / ult_large',
+        for_code: 'ult_large',
+        count: item[:count],
+        cost: item[:count] * -10
+      }
+    ]
+  end
 end
 
 manager.rule 'data-pack bonus for ult_medium' do |items, promo_code=nil|
