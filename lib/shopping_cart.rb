@@ -28,10 +28,9 @@ class ShoppingCart
       sum
     }
     if self.discount_rate then
-      sum - ( self.discount_rate * sum )
-    else
-      sum
+      sum -= ( self.discount_rate * sum )
     end
+    sum.round(2)
   end
 
   # Return array of line items in cart.
