@@ -93,9 +93,35 @@ describe "shopping cart scenarios" do
       expect(line[:count]).to eq 2
     end
 
-    it "should show 2 x 1G data-packs", focus: true do
+    it "should show 2 x 1G data-packs" do
       line = cart.items.find { |item| item[:for_code] == '1gb' }
       expect(line[:count]).to eq 2
+    end
+
+  end
+
+  describe "scenario 4" do
+
+    let(:cart) { ShoppingCart.new(factory.pricing_rules) }
+    let(:promo_code) { 'I<3AMAYSIM' }
+
+    before(:each) {
+      1.times { cart.add(ult_small, promo_code) }
+      1.times { cart.add(datapack_1G) }
+    }
+
+    it "should get total of 31.32" do
+      expect(cart.total).to eq 31.32
+    end
+
+    it "should show 1 ult_small" do
+      line = cart.items.find { |item| item[:code] == 'ult_small' }
+      expect(line[:count]).to eq 1
+    end
+
+    it "should show 1 x 1G data-packs" do
+      line = cart.items.find { |item| item[:code] == '1gb' }
+      expect(line[:count]).to eq 1
     end
 
   end
