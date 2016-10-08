@@ -63,7 +63,7 @@ describe "current pricing rules" do
       manager.rule_for(rule_name) do |rule|
         returned_item = {
           code: rule_name,
-          for_code: 'ult_medium',
+          for_code: '1gb',
           count: 4,
           cost: 0
         }

@@ -51,7 +51,7 @@ manager.rule 'Data-pack bonus / ult_medium' do |items: [], promo_code: nil|
     [
       {
         code: 'Data-pack bonus / ult_medium',
-        for_code: 'ult_medium',
+        for_code: '1gb',
         count: item[:count],
         cost: 0
       }

@@ -2,7 +2,7 @@
 
 require 'shopping_cart'
 require 'pricing_rules_factory'
-require 'current_rules'
+require 'current_rules'  # loads current rules into pricing rules manager
 require 'examples'
 
 describe "shopping cart scenarios" do
@@ -70,7 +70,34 @@ describe "shopping cart scenarios" do
 
   end
 
-  xdescribe "scenario 3" do
+  describe "scenario 3" do
+
+    let(:cart) { ShoppingCart.new(factory.pricing_rules) }
+
+    before(:each) {
+      1.times { cart.add(ult_small) }
+      2.times { cart.add(ult_medium) }
+    }
+
+    it "should get total of 84.70" do
+      expect(cart.total).to eq 84.70
+    end
+
+    it "should show 1 ult_small" do
+      line = cart.items.find { |item| item[:code] == 'ult_small' }
+      expect(line[:count]).to eq 1
+    end
+
+    it "should show 2 ult_medium" do
+      line = cart.items.find { |item| item[:code] == 'ult_medium' }
+      expect(line[:count]).to eq 2
+    end
+
+    it "should show 2 x 1G data-packs", focus: true do
+      line = cart.items.find { |item| item[:for_code] == '1gb' }
+      expect(line[:count]).to eq 2
+    end
+
   end
 
 end
