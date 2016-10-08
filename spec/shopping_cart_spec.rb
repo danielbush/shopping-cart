@@ -118,4 +118,54 @@ describe ShoppingCart do
 
   end
 
+  context "when pricing rules returns a discount (eg promo code)" do
+
+    let(:promo_code) { 'promo-code-1' }
+
+    let(:discount_line) {
+      { discount_rate: 0.1, code: 'promo-code-1' }
+    }
+
+    let(:line1) {
+      { code: 'prod1-code', description: 'prod1-name', count: 1, price: 10, cost: 10 }
+    }
+
+    let(:pricing_rules) {
+      double('PricingRules', { call: [ discount_line ] })
+    }
+
+    describe ShoppingCart, "#discount_rate" do
+
+      it "should return first discount rate" do
+        cart = ShoppingCart.new(pricing_rules)
+        expect(cart.discount_rate).to eq 0.1
+      end
+
+    end
+
+    describe ShoppingCart, "#total" do
+
+      # This ensures our cart won't trip up on a discount line which
+      # doesn't have a cost - it has to be calculated over all items.
+
+      it "should total non-discount lines and apply discount" do
+        cart = ShoppingCart.new(pricing_rules)
+        cart.add(product1, promo_code)
+        expect(cart.total).to eq 9
+      end
+
+    end
+
+    describe ShoppingCart, "#items" do
+
+      it "should display the discount in #items" do
+        cart = ShoppingCart.new(pricing_rules)
+        expect(cart.items).to include discount_line
+      end
+
+    end
+
+  end
+
+
 end
