@@ -42,7 +42,7 @@ describe "current pricing rules" do
           code: rule_name,
           for_code: 'ult_large',
           count: 4,
-          cost: 4*-10
+          cost: 4*-5
         }
         expect(rule.call(items: items)).to eq [ returned_item ]
       end

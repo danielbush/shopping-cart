@@ -37,7 +37,7 @@ manager.rule 'Bulk discount / ult_large' do |items: [], promo_code: nil|
         code: 'Bulk discount / ult_large',
         for_code: 'ult_large',
         count: item[:count],
-        cost: item[:count] * -10
+        cost: item[:count] * -5
       }
     ]
   end
