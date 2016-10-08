@@ -28,11 +28,4 @@ class PricingRulesManager
     self.rules.push({ name: name, rule: proc })
   end
 
-  # Append new rules to the manager.
-  #
-  # Convenience wrapper around `self.rule`.
-
-  def add_rules &proc
-  end
-
 end
