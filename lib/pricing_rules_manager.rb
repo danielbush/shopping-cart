@@ -6,33 +6,33 @@
 
 class PricingRulesManager
 
-  class << self
+  def self.instance
+    @@instance ||= PricingRulesManager.new
+  end
 
-    # Return list of the current rules.
+  # Return list of the current rules.
 
-    def rules
-      @@rules ||= []
-    end
+  def rules
+    @rules ||= []
+  end
 
-    # Apply rules to items with optional promo_code.
+  # Apply rules to items with optional promo_code.
 
-    def call items, promo_code=nil
-      []
-    end
+  def call items, promo_code=nil
+    []
+  end
 
-    # Add a rule to this manager.
+  # Add a rule to this manager.
 
-    def rule name, &proc
-      self.rules.push({ name: name, rule: proc })
-    end
+  def rule name, &proc
+    self.rules.push({ name: name, rule: proc })
+  end
 
-    # Append new rules to the manager.
-    #
-    # Convenience wrapper around `self.rule`.
+  # Append new rules to the manager.
+  #
+  # Convenience wrapper around `self.rule`.
 
-    def add_rules &proc
-    end
-
+  def add_rules &proc
   end
 
 end

@@ -7,9 +7,9 @@ describe PricingRulesFactory do
     # So, currently, PricingRulesFactory is hard-wired to return are
     # code-based PricingRulesManager.
 
-    it "should currently return PricingRulesManager" do
+    it "should currently return PricingRulesManager singleton" do
       factory = PricingRulesFactory.new
-      expect(factory.pricing_rules).to eq PricingRulesManager
+      expect(factory.pricing_rules).to be_a PricingRulesManager
     end
 
   end

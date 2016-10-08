@@ -21,7 +21,7 @@ class PricingRulesFactory
   #     lambda { |*args| [] }
 
   def pricing_rules
-    PricingRulesManager
+    PricingRulesManager.instance
   end
 
 end

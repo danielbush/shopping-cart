@@ -1,6 +1,6 @@
 require 'pricing_rules_manager'
 
-PricingRulesManager.add_rules do |rule|
+PricingRulesManager.instance.add_rules do |rule|
 
   rule '3 for 2 / ult_small' do |items, promo_code|
   end
