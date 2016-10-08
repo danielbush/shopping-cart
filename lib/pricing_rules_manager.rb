@@ -19,7 +19,7 @@ class PricingRulesManager
   # Apply rules to items with optional promo_code.
 
   def call items, promo_code=nil
-    self.rules.flat_map { |rule| rule[:rule].call(items, promo_code) }
+    self.rules.flat_map { |rule| rule[:rule].call(items: items, promo_code: promo_code) }
   end
 
   # Add a rule to this manager.

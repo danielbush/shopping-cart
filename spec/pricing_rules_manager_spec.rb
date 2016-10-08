@@ -35,6 +35,13 @@ describe PricingRulesManager do
     let(:rule_itemA) { { code: 'codeA' } }
     let(:rule_itemB) { { code: 'codeB' } }
 
+    it "should call rules using keyword args" do
+      expect { |b|
+        manager.rule('ruleA', &b)
+        manager.call([])
+      }.to yield_with_args(items: [], promo_code: nil)
+    end
+
     it "should concatenate all rule output" do
       ruleA = lambda { |items, promo_code=nil| [ rule_itemA ] }
       ruleB = lambda { |items, promo_code=nil| [ rule_itemB ] }
