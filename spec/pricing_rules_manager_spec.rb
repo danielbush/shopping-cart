@@ -45,4 +45,18 @@ describe PricingRulesManager do
 
   end
 
+  describe PricingRulesManager, '#rule_for' do
+
+    it "should return a rule in a block if it exists" do
+      ruleA = lambda { |items, promo_code=nil| [ rule_itemA ] }
+      manager.rule('ruleA', &ruleA)
+      expect { |proc| manager.rule_for('ruleA', &proc ) }.to yield_with_args(ruleA)
+    end
+
+    it "should raise rule not found error if rule not found" do
+      expect { |proc| manager.rule_for('ruleA', &proc ) }.to raise_error PricingRulesManager::RuleNotFound
+    end
+
+  end
+
 end

@@ -28,4 +28,16 @@ class PricingRulesManager
     self.rules.push({ name: name, rule: proc })
   end
 
+  # Convenience wrapper to fetch a rule or throw exception.
+
+  def rule_for name, &proc
+    rule = self.rules.find { |rule| rule[:name] === name }
+    raise RuleNotFound, name unless rule
+    proc.call(rule[:rule]) if block_given?
+    rule
+  end
+
+  class RuleNotFound < RuntimeError
+  end
+
 end
