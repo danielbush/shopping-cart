@@ -43,6 +43,18 @@ manager.rule 'Bulk discount / ult_large' do |items: [], promo_code: nil|
   end
 end
 
-manager.rule 'data-pack bonus for ult_medium' do |items, promo_code=nil|
-  []
+manager.rule 'Data-pack bonus / ult_medium' do |items: [], promo_code: nil|
+  item = items.find { |item| item[:code] == 'ult_medium' }
+  if not item then
+    []
+  else
+    [
+      {
+        code: 'Data-pack bonus / ult_medium',
+        for_code: 'ult_medium',
+        count: item[:count],
+        cost: 0
+      }
+    ]
+  end
 end

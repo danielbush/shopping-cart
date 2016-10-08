@@ -48,6 +48,31 @@ describe "current pricing rules" do
       end
     end
 
+    # TODO: should test with more examples.
+
+  end
+
+  describe "data-pack rule" do
+    let(:item_4x_ult_medium) {
+      item_ult_medium.merge(count: 4, cost: 4 * ult_medium.price)
+    }
+    let(:items) {[ item_4x_ult_medium ]}
+    let(:rule_name) { 'Data-pack bonus / ult_medium' }
+
+    it "should add 4 data-packs for 4 ult_mediums" do
+      manager.rule_for(rule_name) do |rule|
+        returned_item = {
+          code: rule_name,
+          for_code: 'ult_medium',
+          count: 4,
+          cost: 0
+        }
+        expect(rule.call(items: items)).to eq [ returned_item ]
+      end
+    end
+
+    # TODO: should test with more examples.
+
   end
 
 end
