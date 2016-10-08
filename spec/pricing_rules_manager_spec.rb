@@ -30,4 +30,19 @@ describe PricingRulesManager do
 
   end
 
+  describe PricingRulesManager, '#call' do
+    let(:item1) { { code: 'code1' } }
+    let(:rule_itemA) { { code: 'codeA' } }
+    let(:rule_itemB) { { code: 'codeB' } }
+
+    it "should concatenate all rule output" do
+      ruleA = lambda { |items, promo_code=nil| [ rule_itemA ] }
+      ruleB = lambda { |items, promo_code=nil| [ rule_itemB ] }
+      manager.rule('ruleA', &ruleA)
+      manager.rule('ruleB', &ruleB)
+      expect(manager.call([ item1 ])).to eq([ rule_itemA, rule_itemB ])
+    end
+
+  end
+
 end
