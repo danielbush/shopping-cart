@@ -1,8 +1,7 @@
-# A class object that allows us to define pricing rules using code.
+# Allows us to define pricing rules using code.
 #
-# PricingRulesManager and each rule should be an object with interface:
-# 
-#     #call items, promo_code=nil
+# PricingRulesManager#call expects items, promo_code=nil.
+# PricingRulesManager will call rules with keyword args: item: [], promo_code: nil .
 
 class PricingRulesManager
 
