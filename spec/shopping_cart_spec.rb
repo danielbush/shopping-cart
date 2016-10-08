@@ -55,8 +55,26 @@ describe ShoppingCart do
       cart.add(product1)
       line = line1.merge(count: 2, cost: 20)
       expect(cart.items).to eq([ line ])
-
     end
+
+  end
+
+  describe ShoppingCart, "#total" do
+
+    it "should total products of same type" do
+      cart = ShoppingCart.new
+      cart.add(product1)
+      cart.add(product1)
+      expect(cart.total).to eq 20
+    end
+
+    it "should total products of different types" do
+      cart = ShoppingCart.new
+      cart.add(product1)
+      cart.add(product2)
+      expect(cart.total).to eq 25
+    end
+
   end
 
   context "with pricing rules" do

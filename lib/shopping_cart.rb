@@ -24,7 +24,7 @@ class ShoppingCart
 
   def total
     sum = self.items.inject(0) { |sum, item|
-      sum += (item[:count] * item[:cost]) if item[:cost]
+      sum += item[:cost] if item[:cost]
       sum
     }
     if self.discount_rate then
