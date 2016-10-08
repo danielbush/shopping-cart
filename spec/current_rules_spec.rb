@@ -75,4 +75,23 @@ describe "current pricing rules" do
 
   end
 
+  describe "I<3AMAYSIM promo-code rule" do
+    let(:items) {[ item_ult_small ]}
+    let(:promo_code) { 'I<3AMAYSIM' }
+    let(:rule_name) { 'Promo-code I<3AMAYSIM' }
+
+    it "should calculate a 10% discount for I<3AMAYSIM promo code" do
+      manager.rule_for(rule_name) do |rule|
+        returned_item = {
+          code: rule_name,
+          discount_rate: 0.1,
+        }
+        expect(rule.call(items: items, promo_code: promo_code)).to eq [ returned_item ]
+      end
+    end
+
+    # TODO: should test with more examples.
+
+  end
+
 end

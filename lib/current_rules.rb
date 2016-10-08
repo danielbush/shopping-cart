@@ -58,3 +58,11 @@ manager.rule 'Data-pack bonus / ult_medium' do |items: [], promo_code: nil|
     ]
   end
 end
+
+manager.rule 'Promo-code I<3AMAYSIM' do |items: [], promo_code: nil|
+  if promo_code == 'I<3AMAYSIM' then
+    [ { discount_rate: 0.1, code: 'Promo-code I<3AMAYSIM' } ]
+  else
+    []
+  end
+end
